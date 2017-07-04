@@ -29,10 +29,11 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
-                <li><a href="#">{{ Auth::user()->name }}</a></li>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                    <li><a href="#">{{ Auth::user()->name }}</a></li>
                 @else
-                <li><a href="{{ route('login') }}">Login</a></li>
-                <li><a href="{{ route('register') }}">Register</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
                 @endif
             </ul>
             </div><!-- /.navbar-collapse -->
