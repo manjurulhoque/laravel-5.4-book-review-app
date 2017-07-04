@@ -23,8 +23,8 @@
 
 				</select>
 
-				{{ Form::label('featured_img', 'Upload a Featured Image') }}
-                {{ Form::file('featured_img') }}
+				{{ Form::label('cover', 'Upload a Cover Image') }}
+                {{ Form::file('cover') }}
 
 				{{ Form::label('description', "Book Description:") }}
 				{{ Form::textarea('description', null, array('class' => 'form-control')) }}

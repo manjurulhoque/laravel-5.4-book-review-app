@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Book;
 use App\Http\Middleware\CheckAdmin;
+use Image;
 
 use Validator;
 
@@ -47,7 +48,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:books|max:255|min:6',
+            'title' => 'required|max:255|min:6',
             'description' => 'required',
             'category_id' => 'required',
             'author' => 'required|max:255'
@@ -61,6 +62,17 @@ class BookController extends Controller
         $book->description = $request->description;
         $book->author = $request->author;
         $book->category_id = $request->category_id;
+
+        if ($request->hasFile('cover')) {
+            $image = $request->file('cover');
+            $filename = $request->file('cover')->getClientOriginalName();
+            $location = public_path('images/' . $filename);
+            if(!file_exists($location))
+            {
+                Image::make($image)->resize(400, 300)->save($location);
+            }
+            $book->cover = $filename;
+        }
 
         $book->save();
 
