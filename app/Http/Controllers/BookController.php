@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Book;
+use App\Http\Middleware\CheckAdmin;
 
 use Validator;
 
 class BookController extends Controller
 {
+    public function __construct(){
+       // $this->middleware('admin', ['except' => ['index', 'show']]);
+        $this->middleware('admin')->only(['create', 'edit', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
