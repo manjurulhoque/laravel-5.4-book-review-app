@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::post('books/{id}/review', 'ReviewController@createReview')->name('create.review');
+
 Route::resource('books', 'BookController');
+Route::resource('categories', 'CategoryController');
 
 Route::get('user/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('user/login', 'Auth\LoginController@login');

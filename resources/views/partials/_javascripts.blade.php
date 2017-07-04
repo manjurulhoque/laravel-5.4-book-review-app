@@ -3,3 +3,4 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{asset('js/bootstrap.js')}}"></script>
 <script src="{{asset('js/parsley.js')}}"></script>
+@yield('scripts')

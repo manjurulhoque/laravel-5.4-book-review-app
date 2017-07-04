@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+
+use Validator;
 
 class CategoryController extends Controller
 {
@@ -23,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -34,7 +37,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255|min:6',
+        ]);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
+
+        $book = new Category();
+        $book->name = $request->name;
+
+        $book->save();
+
+        return redirect()->intended('books');
     }
 
     /**
