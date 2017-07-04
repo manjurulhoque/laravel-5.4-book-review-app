@@ -8,13 +8,14 @@
 		<div class="col-md-8 col-md-offset-2">
 			<h1>Create New Book</h1>
 			<hr>
-			{!! Form::open(array('route' => 'books.store', 'files' => true)) !!}
+			{!! Form::open(array('route' => 'books.store', 'method' => 'POST', 'files' => true)) !!}
+                
 				{{ Form::label('title', 'Book Title:') }}
 				{{ Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255')) }}
 
-
 				{{ Form::label('category_id', 'Category:') }}
 				<select class="form-control" name="category_id">
+                
                     <option value='0'>Select Category</option>
 					@foreach($categories as $category)
 						<option value='{{ $category->id }}'>{{ $category->name }}</option>

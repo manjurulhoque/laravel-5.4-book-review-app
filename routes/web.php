@@ -21,7 +21,7 @@ Route::get('user/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('user/login', 'Auth\LoginController@login');
 Route::get('user/logout', ['as' => 'logout', 'uses'=>'Auth\LoginController@logout']);
 
-Route::get('user/register', 'Auth\RegisterController@showRegistrationForm');
+Route::get('user/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('user/register', 'Auth\RegisterController@register');
 
 Route::get('user/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');

@@ -10,4 +10,8 @@ class Book extends Model
     {
         return $this->belongsTo('App\Category');
     }
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
 }

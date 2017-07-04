@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Book;
+
+use Validator;
 
 class BookController extends Controller
 {
@@ -14,7 +17,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::all();
+
+        return view('books.index')->withBooks($books);
     }
 
     /**
@@ -36,7 +41,25 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:books|max:255|min:6',
+            'description' => 'required',
+            'category_id' => 'required',
+            'author' => 'required|max:255'
+        ]);
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
+
+        $book = new Book();
+        $book->title = $request->title;
+        $book->description = $request->description;
+        $book->author = $request->author;
+        $book->category_id = $request->category_id;
+
+        $book->save();
+
+        return redirect()->route('books.index');
     }
 
     /**
@@ -47,7 +70,8 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return view('books.show')->withBook($book);
     }
 
     /**
