@@ -12,8 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->intended('/books');
 });
+
+Route::get('about', 'PageController@about')->name('about');
 
 Route::post('books/{id}/review', 'ReviewController@createReview')->name('create.review');
 
